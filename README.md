@@ -36,7 +36,7 @@ Implemented in Python with Jupyter Notebooks, AlphaShot provides an interactive 
     jupyter notebook 01_alpha.ipynb
     ```
 
-    This will open the notebook in your web browser, allowing you to run the simulation and analyze the results yourself
+    This will open the notebook in your web browser, allowing you to run the simulation and analyze the results yourself.
 
 ## Results and Analysis
 
