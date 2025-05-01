@@ -17,6 +17,7 @@ Implemented in Python with Jupyter Notebooks, AlphaShot provides an interactive 
 2.  **Install dependencies:** It is recommended to create a virtual environment.
     ```bash
     python3 -m venv venv
+    ```
 
     ```bash
     source venv/bin/activate  # On a real computer
