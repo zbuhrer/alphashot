@@ -39,6 +39,6 @@ Implemented in Python with Jupyter Notebooks, AlphaShot provides an interactive 
 
 ## Results and Analysis
 
-![data/img/vane_angularvelocities_hist_10s.png](data/img/vane_angularvelocities_hist_10s.png)
+![Angular Velocities Histogram](data/img/vane_angular_velocities_hist_10s.png)
 
 ![Angular Velocity Graph](data/img/vane_angular_velocity_10s.png)
