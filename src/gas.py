@@ -4,28 +4,27 @@ class GasEnvironment:
     """
     Represents the gas environment.
     """
-    def __init__(self, gas_type="Hydrogen", pressure=101325.0, temperature=293.15):  # Default: Hydrogen at 1 atm, 20C
+    def __init__(self, gas_type="Hydrogen", pressure=101325.0, temperature=293.15, gas_composition=None):  # Default: Hydrogen at 1 atm, 20C
         """
         Initializes the GasEnvironment object.
 
         Args:
-            gas_type (str): Type of gas (e.g., "Hydrogen", "Helium").
+            gas_type (str): Type of gas (e.g., "Hydrogen", "Helium").  If gas_composition is specified, this is the primary gas.
             pressure (float): Pressure in Pascals.
             temperature (float): Temperature in Kelvin.
+            gas_composition (dict, optional): Dictionary specifying the gas composition as mole fractions.
+                                            For example: {"Hydrogen": 0.6, "Helium": 0.4}. Defaults to None.
         """
         self.gas_type = gas_type
         self.pressure = pressure
         self.temperature = temperature
+        self.gas_composition = gas_composition if gas_composition else {gas_type: 1.0} # if None, assume pure gas
 
-        #  Basic gas properties (can be expanded for more gases)
-        if gas_type == "Hydrogen":
-            self.molecular_mass = 2.016e-3  # kg/mol
-            self.molecular_diameter = 2.89e-10 # meters
-        elif gas_type == "Helium":
-            self.molecular_mass = 4.002602e-3 # kg/mol
-            self.molecular_diameter = 2.18e-10 # meters
-        else:
-            raise ValueError("Unsupported gas type.")
+        # Basic gas properties (can be expanded for more gases)
+        self.gas_properties = {
+            "Hydrogen": {"molecular_mass": 2.016e-3, "molecular_diameter": 2.89e-10},
+            "Helium": {"molecular_mass": 4.002602e-3, "molecular_diameter": 2.18e-10},
+        }
 
 
         self.boltzmann_constant = 1.380649e-23  # J/K
@@ -34,9 +33,31 @@ class GasEnvironment:
          """Calculates the number density of the gas (molecules per cubic meter)."""
          return self.pressure / (self.boltzmann_constant * self.temperature)
 
-    def calculate_mean_free_path(self):
-        """Estimates the mean free path of an alpha particle in the gas (meters)."""
+    def calculate_mean_free_path(self, alpha_particle_diameter=1.0e-15): # Reasonable guess for alpha particle "diameter"
+        """Estimates the mean free path of an alpha particle in the gas (meters).
+
+        Args:
+            alpha_particle_diameter (float): Estimated diameter of the alpha particle (m).
+
+        Returns:
+            float: Mean free path in meters.
+        """
         number_density = self.calculate_number_density()
-        # Simplified calculation - assumes alpha particle and gas molecules are similar size
-        collision_cross_section = np.pi * (self.molecular_diameter**2)
-        return 1 / (np.sqrt(2) * number_density * collision_cross_section)
+        mean_free_path = 0.0
+
+        for gas, fraction in self.gas_composition.items():
+            if gas not in self.gas_properties:
+                raise ValueError(f"Gas type '{gas}' not supported in gas_properties.")
+
+            gas_diameter = self.gas_properties[gas]["molecular_diameter"]
+            reduced_mass = (6.644657230e-27 * self.gas_properties[gas]["molecular_mass"]) / (6.644657230e-27 + self.gas_properties[gas]["molecular_mass"]) # mass of alpha particle is hardcoded here.
+
+            # More accurate collision cross-section (hard sphere model)
+            relative_diameter = (alpha_particle_diameter + gas_diameter) / 2.0
+            collision_cross_section = np.pi * (relative_diameter**2)
+
+
+            mean_free_path += fraction / (np.sqrt(2) * number_density * collision_cross_section)
+
+
+        return 1.0 / mean_free_path # harmonic mean
