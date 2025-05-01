@@ -1,7 +1,44 @@
 # AlphaShot
 
-AlphaShot is an experimental physics simulator for modeling rotational motion driven by beams of alpha particles. Inspired by the [Crookes radiometer](https://en.wikipedia.org/wiki/Crookes_radiometer), AlphaShot explores whether a vane can be rotated not by thermal radiation or photonic pressure, but through direct momentum transfer from MeV-scale alpha particles in a high-pressure gas environment such as hydrogen or helium.
+AlphaShot is a physics simulation project focused on modeling the rotational dynamics of a vane system subjected to alpha particle bombardment within a gas environment. Taking inspiration from the [Crookes radiometer](https://en.wikipedia.org/wiki/Crookes_radiometer), AlphaShot aims to determine if a vane can be effectively rotated through direct momentum transfer from MeV-scale alpha particles interacting with the vane *and* the surrounding high-pressure gas (e.g., hydrogen or helium), rather than by thermal radiation or photonic pressure.
 
-In addition to exploring alpha-driven actuation, the project investigates whether the device's rotational response can be used to estimate the **presence, count, or frequency** of alpha particle interactions over time. This would allow AlphaShot to function as a form of **mechanical particle detection**, where motion becomes a proxy for flux measurement.
+The core objective is to simulate and analyze this alpha-driven actuation, with a secondary focus on exploring the potential for inferring alpha particle **presence, flux, and energy deposition** from the vane's resulting rotational motion. This seeks to establish a novel form of **mechanical alpha particle detection**, translating observed motion into quantitative particle flux and energy measurements.
 
-AlphaShot is implemented in Python with Jupyter Notebooks to allow live tuning of parameters like beam energy, gas composition, and vane geometry. It is designed as a flexible, transparent platform for testing speculative micro-scale propulsion and detection concepts rooted in particle physics.
+Implemented in Python with Jupyter Notebooks, AlphaShot provides an interactive and adaptable simulation environment. Users can readily adjust key parameters such as alpha beam energy, gas composition and pressure, and vane geometry and material properties to explore a wide range of physical configurations. This facilitates the investigation of micro-scale propulsion concepts and the development of a transparent, physics-based model for alpha particle detection using mechanical systems.
+
+## **Running the Simulation:**
+
+1.  **Clone the repository:**
+   ```bash
+   git clone https://github.com/zbuhrer/alphashot
+   cd alphashot
+   ```
+
+2.  **Install dependencies:** It is recommended to create a virtual environment.
+    ```bash
+    python3 -m venv venv
+
+    ```bash
+    source venv/bin/activate  # On a real computer
+    ```
+
+    ```bash
+    venv\Scripts\activate  # On a Windows "computer"
+    ```
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+3.  **Run the Jupyter Notebook:**
+    ```bash
+    jupyter notebook 01_alpha.ipynb
+    ```
+
+    This will open the notebook in your web browser, allowing you to run the simulation and analyze the results yourself
+
+## Results and Analysis
+
+![data/img/vane_angularvelocities_hist_10s.png](data/img/vane_angularvelocities_hist_10s.png)
+
+![Angular Velocity Graph](data/img/vane_angular_velocity_10s.png)
