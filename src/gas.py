@@ -20,7 +20,7 @@ class GasEnvironment:
         self.temperature = temperature
         self.gas_composition = gas_composition if gas_composition else {gas_type: 1.0} # if None, assume pure gas
 
-        # Basic gas properties (can be expanded for more gases)
+        # I'm sorry hardcoding these just made the most sense lol
         self.gas_properties = {
             "Hydrogen": {"molecular_mass": 2.016e-3, "molecular_diameter": 2.89e-10},
             "Helium": {"molecular_mass": 4.002602e-3, "molecular_diameter": 2.18e-10},
