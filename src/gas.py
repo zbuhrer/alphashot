@@ -24,6 +24,10 @@ class GasEnvironment:
         self.gas_properties = {
             "Hydrogen": {"molecular_mass": 2.016e-3, "molecular_diameter": 2.89e-10},
             "Helium": {"molecular_mass": 4.002602e-3, "molecular_diameter": 2.18e-10},
+            "Deuterium": {"molecular_mass": 4.028e-3, "molecular_diameter": 2.9e-10},
+            "Nitrogen": {"molecular_mass": 28.014e-3, "molecular_diameter": 3.64e-10},
+            "Argon": {"molecular_mass": 39.948e-3, "molecular_diameter": 3.8e-10},
+            "Xenon": {"molecular_mass": 131.29e-3, "molecular_diameter": 4.91e-10}
         }
 
 
